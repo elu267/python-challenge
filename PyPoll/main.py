@@ -9,13 +9,14 @@ import csv
 # getting the csv file (data set)
 csvFile = os.path.join('election_data.csv')
 
-# creating a variable to store the entire data file in a dictionary
+# creating a variable to store the entire dataset
 csvDataset = []
 # creating a variable to store the candidate names
 csvDataset_Candidate = []
 # creating a variable to store the voter IDs
 csvDataset_VoterID = []
-
+# creating a variable to hold the candidate, percentage of votes and total votes
+summary_votes = []
 # creating formatting for print
 lines = "-" * 25
 
@@ -27,7 +28,8 @@ with open(csvFile,'r') as electionFile:
         csv_header = next(csvRead)                      #skips the header
         print(f"CSV Header: {csv_header}")
         for row in csvRead:
-            #print(row)
+            # print(row)
+            # this creates a list of dictionaries (i.e. one dictionary for each voter ID)
             csvDataset.append({
             'voterID': row[0], \
             'county': row[1], \
@@ -42,7 +44,8 @@ total_votes = len(csvDataset_VoterID)
 # a complete list of candidates who received votes
 unique_candidate = []
 def unique(csvDataset_Candidate):
-    global unique_candidate
+    # global allows write access to the variable unique candidate
+    global unique_candidate     
     #loop through all elements in list
     for x in csvDataset_Candidate:
         # check if candidate exists in the unique list or not
@@ -51,13 +54,27 @@ def unique(csvDataset_Candidate):
     for x in unique_candidate:
         print(x)
 
+# calling the function 
 unique(csvDataset_Candidate)
 
 # the percentage of votes each candidate won
-
 # the total number of votes each candidate won
+def sumVotes():
+    for z in unique_candidate:                      # z becomes the candidate name  
+        votes = 0                                   # variable resets to zero each loop   
+        print(z)   
+        for c in csvDataset:                        # c is the counter that loops through the dictionary
+            if z == c["candidate"]:                 # because z always equals c (duh)
+                votes += 1                          # tally of votes per candidate
+        print(votes)
+        pctVotes = round((votes/total_votes), 2)
+        summary_votes.append({'candidate': z,'pctVotes': pctVotes, 'totVotes': votes})
 
-# the wnner of the election based on popular vote
+sumVotes()
+print(summary_votes)
+
+# the winner of the election based on popular vote 
+# TBD
 
 print("Election Results")
 print(f"{lines}")

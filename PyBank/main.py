@@ -16,7 +16,8 @@ csvDataset_Month = []
 # creating a variable to store the profits and losses
 csvDataset_Amount = []
 
-# creating the line separators for the print out
+# creating the line separators for the final summary print out
+# love this short cut, found it in "Learn Python the Hard Way"
 lines = "-" * 25
 
 # another way to call in a file without importing os
@@ -48,7 +49,7 @@ for amount in range(1,len(csvDataset_Amount)):
     monthChg.append(csvDataset_Amount[amount] - csvDataset_Amount[amount-1])
 
 chgAmt = round(sum(monthChg) / len(monthChg),2)
-print(str(chgAmt))
+#print(str(chgAmt))
 
 #The greatest increase in profits (date and amount) over the entire period
 #The greatest loss (date and amount) over the entire period
@@ -63,7 +64,7 @@ monthMaxDecr = csvDataset_Month[maxDecrIndex + 1]
 
 #The final print out
 print("Financial Analysis")
-print(f"{lines}") #This is so cool, found it in "Learn Python the Hard Way"
+print(f"{lines}") 
 print(f"Total Months: {total_months}")
 print(f"Total: ${net_total}")
 print(f"Average Change: ${chgAmt}")
@@ -71,3 +72,5 @@ print(f"Greatest Increase in Profits: {monthMaxIncr} (${maxIncr})")
 print(f"Greatest Decrease in Profits: {monthMaxDecr} (${maxDecr})")
 
 # export results to text file
+output_file = os.path.join("pyBank.csv")
+
