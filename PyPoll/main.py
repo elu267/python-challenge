@@ -92,7 +92,7 @@ print(f"{lines}\n")
 print(f"Winner: {winnerChickenDinner}\n")
 print(f"{lines}")
 
-#  Write to a text file - got this from my friend, Learn Python the Hard Way / cross your fingers and pray this works!
+#  Write to a text file
 target = open("pyPoll.txt", 'w')
 
 target.write("Election Results\n")
